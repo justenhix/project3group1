@@ -2,6 +2,12 @@
 from flask import Flask, jsonify
 import csv
 import os
+import sqlalchemy
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
+from sqlalchemy import create_engine, func
+import sqlite3
+
 
 #################################################
 # Flask Setup
@@ -30,43 +36,52 @@ def welcome():
 
 
 @app.route("/api/v1.0/raleigh_unep_data")
-def ral_csv_to_json():
-    # Read CSV file
-    csv_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'ral_dd.csv')
+def ral_sqlite_to_json():
+    # SQLite database file path
+    sqlite_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'ral_dd.sqlite')
 
     # Check if the file exists
-    if not os.path.isfile(csv_file_path):
+    if not os.path.isfile(sqlite_file_path):
+        return jsonify({"error": "SQLite file not found"}), 404
+    
+    # Connect to SQLite database
+    conn = sqlite3.connect(sqlite_file_path)
+    cursor = conn.cursor()
 
-        return jsonify({"error": "CSV file not found"}), 404
-    data = []
-    with open(csv_file_path, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        for row in csv_reader:
-            data.append(row)
+    # Fetch data from SQLite table
+    cursor.execute("SELECT * FROM raleigh")
+    data = cursor.fetchall()
 
-    # Convert CSV data to JSON
+    # Close connection
+    conn.close()
+
+    # Convert SQLite data to JSON
     json_data = jsonify(data)
 
     return json_data
 
 
-
 @app.route("/api/v1.0/charlotte_unep_data")
-def char_csv_to_json():
-    # Read CSV file
-    csv_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'char_dd.csv')
+def char_sqlite_to_json():
+    # Read SQLite file
+    sqlite_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'char_dd.sqlite')
 
     # Check if the file exists
-    if not os.path.isfile(csv_file_path):
+    if not os.path.isfile(sqlite_file_path):
+        return jsonify({"error": "SQLite file not found"}), 404
+    
+    # Connect to SQLite database
+    conn = sqlite3.connect(sqlite_file_path)
+    cursor = conn.cursor()
 
-        return jsonify({"error": "CSV file not found"}), 404
-    data = []
-    with open(csv_file_path, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        for row in csv_reader:
-            data.append(row)
+    # Fetch data from SQLite table
+    cursor.execute("SELECT * FROM charlotte")
+    data = cursor.fetchall()
 
-    # Convert CSV data to JSON
+    # Close connection
+    conn.close()
+
+    # Convert SQLite data to JSON
     json_data = jsonify(data)
 
     return json_data
@@ -74,21 +89,27 @@ def char_csv_to_json():
 
 
 @app.route("/api/v1.0/greensboro_unep_data")
-def green_csv_to_json():
-    # Read CSV file
-    csv_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'green_dd.csv')
+def green_sqlite_to_json():
+    # Read SQLite file
+    sqlite_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'green_dd.sqlite')
 
     # Check if the file exists
-    if not os.path.isfile(csv_file_path):
+    if not os.path.isfile(sqlite_file_path):
 
-        return jsonify({"error": "CSV file not found"}), 404
-    data = []
-    with open(csv_file_path, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        for row in csv_reader:
-            data.append(row)
+        return jsonify({"error": "SQLite file not found"}), 404
+    
+      # Connect to SQLite database
+    conn = sqlite3.connect(sqlite_file_path)
+    cursor = conn.cursor()
 
-    # Convert CSV data to JSON
+    # Fetch data from SQLite table
+    cursor.execute("SELECT * FROM greensboro")
+    data = cursor.fetchall()
+
+    # Close connection
+    conn.close()
+
+    # Convert SQLite data to JSON
     json_data = jsonify(data)
 
     return json_data
@@ -96,21 +117,27 @@ def green_csv_to_json():
 
 
 @app.route("/api/v1.0/winstonsalem_unep_data")
-def win_csv_to_json():
-    # Read CSV file
-    csv_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'win_dd.csv')
+def win_sqlite_to_json():
+    # Read SQLite file
+    sqlite_file_path = os.path.join(os.path.dirname(__file__), 'Output', 'win_dd.sqlite')
 
     # Check if the file exists
-    if not os.path.isfile(csv_file_path):
+    if not os.path.isfile(sqlite_file_path):
 
-        return jsonify({"error": "CSV file not found"}), 404
-    data = []
-    with open(csv_file_path, 'r') as file:
-        csv_reader = csv.DictReader(file)
-        for row in csv_reader:
-            data.append(row)
+        return jsonify({"error": "SQLite file not found"}), 404
+    
+    # Connect to SQLite database
+    conn = sqlite3.connect(sqlite_file_path)
+    cursor = conn.cursor()
 
-    # Convert CSV data to JSON
+    # Fetch data from SQLite table
+    cursor.execute("SELECT * FROM winston")
+    data = cursor.fetchall()
+
+    # Close connection
+    conn.close()
+
+    # Convert SQLite data to JSON
     json_data = jsonify(data)
 
     return json_data
