@@ -7,6 +7,8 @@ Instructions on how to use and interact with the project:
 
 The team utilized API calls to generate JSON’s for the Series ID which encapsulated unemployment rate and value per city in North Carolina.  CSV output was generated and ingested into 4 SQL Tables (1 per city in NC).  Finally, a Pandas Dataframe was created per the rubric.
 
+We chose Postgres SQL via PGAdmin because of it's user friendly interface and application programming.
+
 At least one paragraph summarizing efforts for ethical considerations made in the project:
 
 The Bureau of Labor Statistics provides publicly accessible historical labor data via its public API.  The project team was careful to present the data provided accurately and avoided misrepresenting the data that could possibly lead to false conclusions. 
