@@ -5,6 +5,10 @@ An analysis and comparison of the top 4 Metro Areas in North Carolina with respe
 
 Instructions on how to use and interact with the project:
 
+Our team utilized a Flask API with JSON outputs.  
+
+Code Run in VS Code and initiated local server.  Run each individual route for a unique output.
+
 The team utilized API calls to generate JSON’s for the Series ID which encapsulated unemployment rate and value per city in North Carolina.  CSV output was generated and ingested into 4 SQL Tables (1 per city in NC).  Finally, a Pandas Dataframe was created per the rubric.
 
 We chose Postgres SQL via PGAdmin because of it's user friendly interface and application programming.
