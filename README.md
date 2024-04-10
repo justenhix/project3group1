@@ -18,8 +18,11 @@ API https://api.bls.gov/publicAPI/v2/timeseries/data/
 References for any code used that is not your own
 
 All Code is unique but we took into consideration: 
+
 Stack Overflow
+
 W3 Schools
+
 Instructor provided snippets of code
 
 
