@@ -45,3 +45,16 @@ rate varchar not null
 );
 
 select * from charlotte
+
+drop table year_month
+create table year_month(
+ID serial primary key,
+year varchar not null,
+month varchar not null,
+value varchar not null,
+rate varchar not null,
+city varchar (30) not null
+
+
+);
+select * from year_month
